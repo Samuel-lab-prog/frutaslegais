@@ -133,19 +133,13 @@ export default function MilkshakeApp() {
   return (
     <main className="container">
       <header className="header">
-        <a href="#inicio" className="brand"><span className="brand-icon">✳</span> fruta no copo</a>
+        <a href="#montar" className="brand"><span className="brand-icon" aria-hidden="true">🍓</span> fruta no copo</a>
         <nav><a href="#montar">Montar</a><a href="#salvos">Salvos</a></nav>
       </header>
 
-      <section className="intro" id="inicio">
-        <p className="kicker">SUA MISTURA, SUAS MEDIDAS</p>
-        <h1>Um milkshake<br /><span>do seu jeito.</span></h1>
-        <p>Escolha as frutas, informe a quantidade e veja uma estimativa de calorias.</p>
-      </section>
-
       <section className="workspace" id="montar">
         <form className="builder" onSubmit={submitMilkshake}>
-          <div className="section-title"><div><p className="kicker">01 / MONTAGEM</p><h2>Monte o seu</h2></div></div>
+          <div className="section-title"><div><p className="kicker">NA COZINHA</p><h2>Escolha a mistura</h2></div></div>
 
           <label htmlFor="shake-name">Nome do milkshake</label>
           <input id="shake-name" value={name} onChange={(event) => setName(event.target.value)} maxLength={80} placeholder="Ex.: Morango com banana" required />
@@ -173,22 +167,15 @@ export default function MilkshakeApp() {
           {fruitError ? <p className="message error" role="status">{fruitError}</p> : null}
           {savedError ? <p className="message error" role="status">{savedError}</p> : null}
 
-          <div className="estimate"><span>Total estimado</span><strong>{formatCalories(estimate)}</strong><small>calculado pelas porções escolhidas</small></div>
+          <div className="estimate"><span>Total estimado</span><strong>{formatCalories(estimate)}</strong><small>Só as frutas entram nessa conta; leite e sorvete ficam de fora.</small></div>
           <div className="form-actions"><button className="save-button" type="submit" disabled={saving || !fruits.length}>{saving ? "Salvando…" : editingId ? "Atualizar milkshake" : "Salvar milkshake"}</button>{editingId ? <button type="button" className="cancel-button" onClick={resetForm}>Cancelar</button> : null}</div>
           {feedback ? <p className="message" role="status">{feedback}</p> : null}
         </form>
 
-        <aside className="how-card">
-          <p className="kicker">COMO FUNCIONA</p>
-          <h2>Calorias sem mistério.</h2>
-          <p>A API informa as calorias de cada fruta a cada 100 g. O cálculo acompanha a quantidade que você escolhe.</p>
-          <div className="formula"><span>calorias da fruta</span><strong>kcal por 100 g × porção ÷ 100</strong></div>
-          <p className="small-note">A estimativa considera somente as frutas. Leite, sorvete e outros complementos não entram no cálculo.</p>
-        </aside>
       </section>
 
       <section className="saved-section" id="salvos">
-        <div className="section-title"><div><p className="kicker">02 / SEU CADERNO</p><h2>Milkshakes salvos</h2></div><span className="saved-count">{milkshakes.length} {milkshakes.length === 1 ? "receita" : "receitas"}</span></div>
+        <div className="section-title"><div><p className="kicker">SEU CADERNO</p><h2>Milkshakes salvos</h2></div><span className="saved-count">{milkshakes.length} {milkshakes.length === 1 ? "receita" : "receitas"}</span></div>
         {loading ? <p className="empty-state">Carregando receitas…</p> : milkshakes.length ? <div className="saved-grid">
           {milkshakes.map((milkshake) => <article className="saved-card" key={milkshake.id}>
             <div className="saved-card-top"><span className="kicker">RECEITA {String(milkshake.id).padStart(2, "0")}</span><strong>{formatCalories(milkshake.totalCalories)}</strong></div>
@@ -199,7 +186,6 @@ export default function MilkshakeApp() {
         </div> : <div className="empty-state"><strong>Nenhum milkshake salvo ainda.</strong><p>Monte uma combinação acima e guarde a receita aqui.</p></div>}
       </section>
 
-      <footer><span>fruta no copo</span><span>Informações de frutas: Fruityvice API</span></footer>
     </main>
   );
 }
