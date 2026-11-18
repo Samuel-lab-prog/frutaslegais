@@ -1,0 +1,23 @@
+{
+  "name": "frutaslegais",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/ensure-local-db.mjs && next dev",
+    "db:setup": "node scripts/ensure-local-db.mjs",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@next/env": "16.4.6",
+    "next": "16.4.6",
+    "pg": "^8.23.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6"
+  }
+}
